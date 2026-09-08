@@ -1,0 +1,111 @@
+import type { SapSystem } from '@/types';
+
+export const SAP_SYSTEMS: SapSystem[] = [
+  {
+    id: 's4d',
+    name: 'S4D',
+    env: 'DEV',
+    description: 'S/4HANA Development',
+    status: 'healthy',
+    client: '100',
+    version: 'S/4HANA 2023',
+    activeJobs: 4,
+    failedJobs: 0,
+    openIncidents: 1,
+  },
+  {
+    id: 's4q',
+    name: 'S4Q',
+    env: 'QAS',
+    description: 'S/4HANA Quality',
+    status: 'warning',
+    client: '200',
+    version: 'S/4HANA 2023',
+    activeJobs: 7,
+    failedJobs: 1,
+    openIncidents: 3,
+  },
+  {
+    id: 's4p',
+    name: 'S4P',
+    env: 'PRD',
+    description: 'S/4HANA Production',
+    status: 'critical',
+    client: '300',
+    version: 'S/4HANA 2023',
+    activeJobs: 12,
+    failedJobs: 3,
+    openIncidents: 5,
+  },
+  {
+    id: 'bwq',
+    name: 'BWQ',
+    env: 'BW',
+    description: 'BW/4HANA Analytics Quality',
+    status: 'warning',
+    client: '400',
+    version: 'BW/4HANA 2.0',
+    activeJobs: 3,
+    failedJobs: 1,
+    openIncidents: 2,
+  },
+  {
+    id: 'bwp',
+    name: 'BWP',
+    env: 'BW',
+    description: 'BW/4HANA Analytics Production',
+    status: 'healthy',
+    client: '500',
+    version: 'BW/4HANA 2.0',
+    activeJobs: 5,
+    failedJobs: 0,
+    openIncidents: 1,
+  },
+  {
+    id: 'btp',
+    name: 'BTP',
+    env: 'BTP',
+    description: 'SAP Business Technology Platform',
+    status: 'healthy',
+    version: 'Cloud Foundry',
+    activeJobs: 2,
+    failedJobs: 0,
+    openIncidents: 0,
+  },
+  {
+    id: 'ecc',
+    name: 'ECC',
+    env: 'ECC',
+    description: 'Legacy ERP System',
+    status: 'warning',
+    client: '600',
+    version: 'ECC 6.0 EHP8',
+    activeJobs: 9,
+    failedJobs: 1,
+    openIncidents: 4,
+  },
+  {
+    id: 'sol',
+    name: 'SOL',
+    env: 'SOL',
+    description: 'Operations & Monitoring',
+    status: 'healthy',
+    version: 'Solution Manager 7.2',
+    activeJobs: 2,
+    failedJobs: 0,
+    openIncidents: 0,
+  },
+];
+
+export const getSystemByEnv = (env: string): SapSystem | undefined =>
+  SAP_SYSTEMS.find(s => s.env === env);
+
+export const getSystemById = (id: string): SapSystem | undefined =>
+  SAP_SYSTEMS.find(s => s.id === id);
+
+export const SYSTEM_STATUS_COLORS: Record<string, string> = {
+  healthy: '#39C985',
+  warning: '#F5B942',
+  critical: '#F15B64',
+  unknown: '#A7ABB7',
+};

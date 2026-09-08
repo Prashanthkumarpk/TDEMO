@@ -1,0 +1,17 @@
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE and system folders
+.idea/
+.vscode/
+.DS_Store/
+Thumbs.db/

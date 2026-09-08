@@ -1,0 +1,130 @@
+import type { Persona } from '@/types';
+
+export const PERSONAS: Persona[] = [
+  {
+    id: 'basis-admin',
+    role: 'SAP Basis Administrator',
+    icon: 'Server',
+    primaryColor: '#5DA9FF',
+    responsibilities: [
+      'Monitor background job execution',
+      'Check system availability and performance',
+      'Investigate ABAP dumps and short dumps',
+      'Coordinate issue remediation across teams',
+    ],
+    agentCapabilities: [
+      '"Show all failed jobs in PRD today."',
+      '"Check system health across DEV, QAS, and PRD."',
+      '"Find ABAP dumps in the last 2 hours."',
+      '"Which jobs are running longer than expected?"',
+    ],
+  },
+  {
+    id: 'app-support',
+    role: 'Application Support Consultant',
+    icon: 'Headphones',
+    primaryColor: '#39C985',
+    responsibilities: [
+      'Investigate and resolve incidents',
+      'Search known-error databases and runbooks',
+      'Analyze logs and configurations',
+      'Escalate with complete technical context',
+    ],
+    agentCapabilities: [
+      '"Find similar incidents to INC0012847 and their resolutions."',
+      '"Summarize the technical evidence for this job failure."',
+      '"What configuration changed before this failure?"',
+      '"Generate a handover summary for the support team."',
+    ],
+  },
+  {
+    id: 'functional',
+    role: 'Functional Consultant',
+    icon: 'Settings',
+    primaryColor: '#F5B942',
+    responsibilities: [
+      'Discover and validate business scenarios',
+      'Compare configuration across systems',
+      'Validate process availability before go-live',
+      'Identify missing configuration or setup',
+    ],
+    agentCapabilities: [
+      '"Does automated payment processing exist in QAS?"',
+      '"Compare payment configuration between QAS and PRD."',
+      '"Is the approval workflow active for Company Code 2000?"',
+      '"What are the configuration gaps for this scenario?"',
+    ],
+  },
+  {
+    id: 'developer',
+    role: 'Developer',
+    icon: 'Code',
+    primaryColor: '#C52A5C',
+    responsibilities: [
+      'Check interfaces, services, and runtime errors',
+      'Investigate transport and development objects',
+      'Find related technical objects',
+      'Generate investigation summaries',
+    ],
+    agentCapabilities: [
+      '"Is the OData service API_SALESORDER_SRV active in QAS?"',
+      '"Show transports waiting for import in PRD."',
+      '"Find the root cause of today\'s invoice-processing delay."',
+      '"Which RFC destinations are currently failing?"',
+    ],
+  },
+  {
+    id: 'business-user',
+    role: 'Business User',
+    icon: 'Briefcase',
+    primaryColor: '#A01441',
+    responsibilities: [
+      'Retrieve business document status',
+      'Understand processing delays',
+      'Request approved operational actions',
+      'Track order or payment status',
+    ],
+    agentCapabilities: [
+      '"What is the status of my vendor payment run?"',
+      '"Why is my sales order delivery delayed?"',
+      '"Is the end-of-month closing complete?"',
+      '"Request approval for urgent manual posting."',
+    ],
+  },
+  {
+    id: 'delivery-manager',
+    role: 'Delivery Manager',
+    icon: 'TrendingUp',
+    primaryColor: '#8B5CF6',
+    responsibilities: [
+      'View operational trends and KPIs',
+      'Identify recurring issues and patterns',
+      'Track system health and support efficiency',
+      'Prepare status reports for stakeholders',
+    ],
+    agentCapabilities: [
+      '"Show me the top recurring incidents this month."',
+      '"Prepare a system-health report for the project manager."',
+      '"How many critical incidents affected PRD this week?"',
+      '"What is the average incident resolution time?"',
+    ],
+  },
+  {
+    id: 'project-team',
+    role: 'Project Team',
+    icon: 'Users',
+    primaryColor: '#06B6D4',
+    responsibilities: [
+      'Search project-specific SAP capabilities',
+      'Discover and reuse existing assets',
+      'Share system knowledge across the team',
+      'Validate scenario readiness for go-live',
+    ],
+    agentCapabilities: [
+      '"Which SAP capabilities are already built in DEV?"',
+      '"Discover all interfaces related to finance processing."',
+      '"Is the payroll scenario configured for go-live in QAS?"',
+      '"Generate a capabilities summary for the project kickoff."',
+    ],
+  },
+];
