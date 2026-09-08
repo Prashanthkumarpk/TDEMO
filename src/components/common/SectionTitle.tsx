@@ -15,7 +15,7 @@ export function SectionTitle({ eyebrow, title, titleHighlight, subtitle, centere
   const align = centered ? 'text-center items-center' : '';
 
   return (
-    <div ref={ref} className={`flex flex-col gap-3 ${align} ${className}`}>
+    <div ref={ref} className={`flex flex-col gap-2 ${align} ${className}`}>
       {eyebrow && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -23,16 +23,16 @@ export function SectionTitle({ eyebrow, title, titleHighlight, subtitle, centere
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2"
         >
-          <div className="h-px w-8 bg-primary" />
-          <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary">{eyebrow}</span>
-          <div className="h-px w-8 bg-primary" />
+          <div className="h-px w-6 bg-primary" />
+          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary">{eyebrow}</span>
+          <div className="h-px w-6 bg-primary" />
         </motion.div>
       )}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={visible ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold"
+        className="text-2xl md:text-3xl lg:text-4xl font-heading font-semibold leading-tight"
       >
         {title}{' '}
         {titleHighlight && (
@@ -44,7 +44,7 @@ export function SectionTitle({ eyebrow, title, titleHighlight, subtitle, centere
           initial={{ opacity: 0, y: 20 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-text-secondary text-lg max-w-2xl"
+          className="text-text-secondary text-base max-w-2xl"
         >
           {subtitle}
         </motion.p>

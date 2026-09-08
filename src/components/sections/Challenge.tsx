@@ -44,7 +44,7 @@ export function Challenge() {
         />
 
         {/* Tool chaos — scattered cards */}
-        <div ref={ref} className="mt-16 mb-16">
+        <div ref={ref} className="mt-10 mb-10">
           <p className="text-xs font-mono uppercase tracking-[0.2em] text-text-secondary mb-5">
             Typical tools needed for one operational question
           </p>

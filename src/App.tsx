@@ -60,20 +60,41 @@ export function App() {
         {isPresentationMode && <PresentationMode key="presentation" />}
       </AnimatePresence>
 
-      <div className={isPresentationMode ? 'hidden' : undefined}>
+      <div className={isPresentationMode ? 'hidden' : undefined} style={{ overflowX: 'hidden', width: '100%' }}>
         <Navbar />
-        <main id="main-content" tabIndex={-1}>
+        <main id="main-content" tabIndex={-1} style={{ overflowX: 'hidden' }}>
           <Hero />
+          <div className="section-divider" aria-hidden="true" />
           <Challenge />
-          <Idea />
+          <div className="section-divider" aria-hidden="true" />
+          <div className="section-alt">
+            <Idea />
+          </div>
+          <div className="section-divider" aria-hidden="true" />
           <Demo />
-          <UseCases />
+          <div className="section-divider" aria-hidden="true" />
+          <div className="section-alt">
+            <UseCases />
+          </div>
+          <div className="section-divider" aria-hidden="true" />
           <AgenticWorkflow />
-          <Architecture />
+          <div className="section-divider" aria-hidden="true" />
+          <div className="section-alt">
+            <Architecture />
+          </div>
+          <div className="section-divider" aria-hidden="true" />
           <Security />
-          <BusinessValue />
+          <div className="section-divider" aria-hidden="true" />
+          <div className="section-alt">
+            <BusinessValue />
+          </div>
+          <div className="section-divider" aria-hidden="true" />
           <Personas />
-          <WhyMsg />
+          <div className="section-divider" aria-hidden="true" />
+          <div className="section-alt">
+            <WhyMsg />
+          </div>
+          <div className="section-divider" aria-hidden="true" />
           <FinalMessage />
         </main>
         <Footer />

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageSquare, Brain, Database, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Brain, Database, Shield, Zap } from 'lucide-react';
+import { TeamsIcon } from '@/components/common/TeamsIcon';
 import { SectionTitle } from '@/components/common/SectionTitle';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
@@ -26,7 +27,7 @@ const AGENTIC_STEPS = [
 // Visual flow: Teams → Agent → SAP Systems
 const FLOW_NODES = [
   {
-    icon: MessageSquare,
+    icon: null,        // uses TeamsIcon SVG directly
     label: 'Microsoft Teams',
     sublabel: 'Where users live',
     color: '#5DA9FF',
@@ -69,16 +70,17 @@ export function Idea() {
         />
 
         {/* ── MAIN FLOW VISUAL ── */}
-        <div ref={ref} className="mt-16 mb-16">
-          <div className="relative flex flex-col sm:flex-row items-center justify-center gap-0">
+        <div ref={ref} className="mt-10 mb-10">
+          {/* Responsive: vertical on mobile, horizontal grid on md+ */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-0 overflow-x-auto pb-2">
             {FLOW_NODES.map((node, i) => (
-              <div key={i} className="flex flex-col sm:flex-row items-center">
+              <div key={i} className="flex flex-col md:flex-row items-center shrink-0">
                 {/* Node card */}
                 <motion.div
                   initial={{ opacity: 0, y: 24 }}
                   animate={visible ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.55, delay: i * 0.12 }}
-                  className="relative flex flex-col items-center gap-2 px-5 py-4 rounded-2xl border text-center min-w-[130px]"
+                  className="relative flex flex-col items-center gap-2 px-5 py-4 rounded-2xl border text-center w-[148px]"
                   style={{
                     background: `radial-gradient(ellipse at 50% 0%, ${node.glow} 0%, rgba(17,19,26,0.9) 70%)`,
                     borderColor: `${node.color}30`,
@@ -94,7 +96,11 @@ export function Idea() {
                       boxShadow: `0 0 16px ${node.glow}`,
                     }}
                   >
-                    <node.icon size={20} style={{ color: node.color }} aria-hidden="true" />
+                    {node.icon === null ? (
+                      <TeamsIcon size={22} />
+                    ) : (
+                      <node.icon size={20} style={{ color: node.color }} aria-hidden="true" />
+                    )}
                   </div>
                   <div className="text-xs font-semibold text-text-primary">{node.label}</div>
                   <div className="text-[10px] text-text-secondary leading-tight">{node.sublabel}</div>
@@ -106,10 +112,10 @@ export function Idea() {
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={visible ? { opacity: 1, scaleX: 1 } : {}}
                     transition={{ duration: 0.4, delay: i * 0.12 + 0.2 }}
-                    className="flex items-center justify-center mx-2 sm:mx-1 my-2 sm:my-0"
+                    className="flex items-center justify-center mx-1 my-2 md:my-0 rotate-90 md:rotate-0"
                   >
                     <div className="flex items-center gap-0.5">
-                      <div className="w-6 sm:w-8 h-px bg-gradient-to-r from-transparent via-white/20 to-white/20" />
+                      <div className="w-6 md:w-10 h-px bg-gradient-to-r from-transparent via-white/20 to-white/20" />
                       <ArrowRight size={14} className="text-text-secondary opacity-50 shrink-0" />
                     </div>
                   </motion.div>

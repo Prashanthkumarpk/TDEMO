@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SectionTitle } from '@/components/common/SectionTitle';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { SystemEnvBadge, Badge } from '@/components/common/Badge';
+import { TeamsIcon } from '@/components/common/TeamsIcon';
 
 const USE_CASES = [
   {
@@ -179,12 +180,13 @@ export function UseCases() {
               {/* Simulated conversation */}
               <div className="glass rounded-2xl overflow-hidden border border-border">
                 <div className="bg-bg-surface-light border-b border-border px-4 py-3 flex items-center gap-3">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 rounded-full bg-danger/60" />
-                    <div className="w-2 h-2 rounded-full bg-warning/60" />
-                    <div className="w-2 h-2 rounded-full bg-success/60" />
+                  <div className="relative shrink-0">
+                    <TeamsIcon size={26} />
+                    <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-primary border border-bg-surface-light flex items-center justify-center">
+                      <span className="text-[6px] font-bold text-white">S</span>
+                    </div>
                   </div>
-                  <span className="text-xs text-text-secondary font-mono">SAP Command Center · {activeCase.title}</span>
+                  <span className="text-xs text-text-secondary font-mono flex-1 truncate">SAP Command Center · {activeCase.title}</span>
                   <SystemEnvBadge env={activeCase.systemBadge} />
                 </div>
                 <div className="p-4 space-y-3">

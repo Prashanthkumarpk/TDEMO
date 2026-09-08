@@ -1,6 +1,7 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { type LucideIcon, Play, ChevronRight, Layers, MessageSquare, Zap, Shield } from 'lucide-react';
+import { type LucideIcon, Play, ChevronRight, Layers, Zap, Shield } from 'lucide-react';
+import { TeamsIcon } from '@/components/common/TeamsIcon';
 import { HeroScene } from '@/components/three/HeroScene';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 import { useAppStore } from '@/store/appStore';
@@ -58,15 +59,21 @@ function LiveConversationPreview() {
           className="flex items-center gap-2.5 px-4 py-3 border-b"
           style={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.07)' }}
         >
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shrink-0">
-            <span className="text-[10px] font-bold text-white">SC</span>
+          <div className="relative shrink-0">
+            <TeamsIcon size={28} />
+            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-primary border border-bg-surface flex items-center justify-center">
+              <span className="text-[6px] font-bold text-white">S</span>
+            </div>
           </div>
           <div className="flex-1 min-w-0">
             <div className="text-xs font-semibold text-text-primary flex items-center gap-1.5">
               SAP Command Center
               <span className="w-1.5 h-1.5 rounded-full bg-success" style={{ animation: 'pulseRing 1.5s ease-out infinite' }} />
             </div>
-            <div className="text-[10px] text-text-secondary opacity-55">Microsoft Teams · All systems connected</div>
+            <div className="text-[10px] text-text-secondary opacity-55 flex items-center gap-1">
+              <TeamsIcon size={10} />
+              <span>Microsoft Teams · All systems connected</span>
+            </div>
           </div>
           <div className="flex gap-1">
             {['bg-danger/40', 'bg-warning/40', 'bg-success/40'].map((c, i) => (
@@ -392,7 +399,10 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.65 }}
               className="flex flex-wrap gap-2"
             >
-              <FeaturePill icon={MessageSquare} label="Microsoft Teams Native" />
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs text-text-secondary" style={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.09)' }}>
+                <TeamsIcon size={13} />
+                <span>Microsoft Teams Native</span>
+              </div>
               <FeaturePill icon={Zap} label="Multi-System SAP Intelligence" />
               <FeaturePill icon={Shield} label="Governance First" />
             </motion.div>

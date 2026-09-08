@@ -83,7 +83,7 @@ export function AgenticWorkflow() {
         />
 
         {/* Workflow steps */}
-        <div ref={ref} className="mt-16">
+        <div ref={ref} className="mt-10">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {WORKFLOW_STEPS.map((step, i) => (
               <motion.button

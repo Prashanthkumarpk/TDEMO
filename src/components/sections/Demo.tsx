@@ -32,7 +32,7 @@ export function Demo() {
           subtitle="A fully simulated Microsoft Teams agent. Run the guided demo to watch the complete agentic workflow live."
         />
 
-        <div ref={ref} className="mt-12 grid lg:grid-cols-[1fr_360px] gap-8 items-start">
+        <div ref={ref} className="mt-8 grid lg:grid-cols-[1fr_340px] gap-6 items-start">
           {/* Chat area with glow frame */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -49,7 +49,7 @@ export function Demo() {
               }}
               aria-hidden="true"
             />
-            <div className="h-[660px] rounded-2xl overflow-hidden">
+            <div className="h-[540px] md:h-[620px] lg:h-[660px] rounded-2xl overflow-hidden">
               <TeamsDemo />
             </div>
           </motion.div>

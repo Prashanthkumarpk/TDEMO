@@ -22,7 +22,7 @@ export function BusinessValue() {
         />
 
         {/* Metric cards */}
-        <div ref={ref} className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
+        <div ref={ref} className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
           {METRIC_CARDS.map((metric, i) => (
             <motion.div
               key={i}
@@ -38,12 +38,12 @@ export function BusinessValue() {
           ))}
         </div>
 
-        <p className="text-xs text-center text-text-secondary opacity-50 mb-12">
+        <p className="text-xs text-center text-text-secondary opacity-50 mb-8">
           Illustrative hackathon targets. Actual outcomes depend on the customer landscape, integrations, process maturity, and implementation scope.
         </p>
 
         {/* Value pillars grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
           {VALUE_PILLARS.map((pillar, i) => {
             const Icon = ICON_MAP[pillar.icon] ?? Zap;
             return (
@@ -78,7 +78,7 @@ export function BusinessValue() {
             subtitle="A phased approach that builds trust, capability, and organizational readiness at each stage."
           />
 
-          <div className="mt-12 relative">
+          <div className="mt-8 relative">
             <div className="hidden lg:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" aria-hidden="true" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {ROADMAP_PHASES.map((phase, i) => (

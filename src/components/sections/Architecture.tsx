@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TeamsIcon } from '@/components/common/TeamsIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import { SectionTitle } from '@/components/common/SectionTitle';
@@ -31,7 +32,7 @@ export function Architecture() {
           subtitle="Six distinct layers with security and governance embedded throughout — not bolted on afterward."
         />
 
-        <div ref={ref} className="mt-16 grid lg:grid-cols-[1fr_320px] gap-8 items-start">
+        <div ref={ref} className="mt-10 grid lg:grid-cols-[1fr_300px] gap-6 items-start">
           {/* Layer accordion */}
           <div className="space-y-2">
             {ARCHITECTURE_LAYERS.map((layer, i) => (
@@ -111,7 +112,7 @@ export function Architecture() {
               <div className="space-y-1">
                 {[
                   { label: 'User', color: '#5DA9FF', arrow: true },
-                  { label: 'Microsoft Teams', color: '#5DA9FF', arrow: true },
+                  { label: 'Microsoft Teams', color: '#5DA9FF', arrow: true, teamsIcon: true },
                   { label: 'Agent Layer', color: '#A01441', arrow: true },
                   { label: 'Orchestration', color: '#C52A5C', arrow: true },
                   { label: 'Governance Check', color: '#F5B942', arrow: true },
@@ -123,7 +124,10 @@ export function Architecture() {
                       <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                       {item.arrow && <div className="w-px h-4" style={{ backgroundColor: item.color + '40' }} />}
                     </div>
-                    <span className="text-xs text-text-secondary py-1">{item.label}</span>
+                    <span className="text-xs text-text-secondary py-1 flex items-center gap-1">
+                      {'teamsIcon' in item && item.teamsIcon && <TeamsIcon size={12} />}
+                      {item.label}
+                    </span>
                   </div>
                 ))}
               </div>

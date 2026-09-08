@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, RotateCcw, Play, ChevronDown, MonitorPlay } from 'lucide-react';
+import { TeamsIcon } from '@/components/common/TeamsIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ConversationMessage, SystemEnv } from '@/types';
 import { useAppStore } from '@/store/appStore';
@@ -225,15 +226,22 @@ export function TeamsDemo() {
       {/* Header */}
       <div className="bg-bg-surface-light border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-            <span className="text-xs font-bold text-white">SC</span>
+          {/* Teams + SAP branding */}
+          <div className="relative">
+            <TeamsIcon size={32} />
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary border-2 border-bg-surface flex items-center justify-center">
+              <span className="text-[7px] font-bold text-white">S</span>
+            </div>
           </div>
           <div>
             <div className="text-sm font-semibold text-text-primary flex items-center gap-2">
               SAP Command Center
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
             </div>
-            <div className="text-xs text-text-secondary">Enterprise Agent · All systems connected</div>
+            <div className="text-xs text-text-secondary flex items-center gap-1">
+              <TeamsIcon size={11} />
+              <span>Microsoft Teams · Enterprise Agent</span>
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-2">
