@@ -23,14 +23,22 @@ export function TeamsDemo() {
   const [isTyping, setIsTyping] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('batch-jobs');
   const [showSuggestions, setShowSuggestions] = useState(true);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const demoTimeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Scroll only within the messages container — never the page viewport
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, []);
 
-  useEffect(() => { scrollToBottom(); }, [messages, isTyping, scrollToBottom]);
+  useEffect(() => {
+    // Small delay so the newly rendered message has height before we scroll
+    const t = setTimeout(scrollToBottom, 60);
+    return () => clearTimeout(t);
+  }, [messages, isTyping, scrollToBottom]);
 
   const clearTimeouts = () => {
     demoTimeouts.current.forEach(clearTimeout);
@@ -263,8 +271,8 @@ export function TeamsDemo() {
         </div>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0" role="log" aria-live="polite" aria-label="Agent conversation">
+      {/* Messages — ref here so we scroll only inside this container, not the page */}
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0" role="log" aria-live="polite" aria-label="Agent conversation">
         {messages.length === 0 && showSuggestions && (
           <div className="space-y-4">
             <div className="text-center py-4">
@@ -333,7 +341,6 @@ export function TeamsDemo() {
         </AnimatePresence>
 
         {isTyping && <TypingIndicator />}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}

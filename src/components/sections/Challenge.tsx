@@ -1,24 +1,24 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Monitor, MessageSquare, FileText, Ticket, Mail, Database } from 'lucide-react';
+import { Monitor, MessageSquare, FileText, Ticket, Mail, Database, AlertTriangle } from 'lucide-react';
 import { SectionTitle } from '@/components/common/SectionTitle';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const TOOLS = [
-  { icon: Monitor, label: 'SAP GUI', color: 'text-primary', desc: 'T-codes & navigation' },
-  { icon: MessageSquare, label: 'Microsoft Teams', color: 'text-info', desc: 'Communication' },
-  { icon: Monitor, label: 'SM37 / SM36', color: 'text-warning', desc: 'Job monitoring' },
-  { icon: Ticket, label: 'ServiceNow', color: 'text-success', desc: 'Incident management' },
-  { icon: Mail, label: 'Email', color: 'text-text-secondary', desc: 'Coordination' },
-  { icon: FileText, label: 'Documentation', color: 'text-purple-400', desc: 'Runbooks & guides' },
-  { icon: Database, label: 'Multiple SAP Systems', color: 'text-danger', desc: 'DEV · QAS · PRD' },
+  { icon: Monitor, label: 'SAP GUI', color: '#F15B64', desc: 'T-codes & navigation' },
+  { icon: MessageSquare, label: 'Microsoft Teams', color: '#5DA9FF', desc: 'Communication' },
+  { icon: Monitor, label: 'SM37 / SU53', color: '#F5B942', desc: 'Job monitoring' },
+  { icon: Ticket, label: 'ServiceNow', color: '#39C985', desc: 'Incident management' },
+  { icon: Mail, label: 'Email chains', color: '#A7ABB7', desc: 'Coordination' },
+  { icon: FileText, label: 'Documentation', color: '#8B5CF6', desc: 'Runbooks & guides' },
+  { icon: Database, label: 'Multiple SAP Systems', color: '#A01441', desc: 'DEV · QAS · PRD' },
 ];
 
-const PAIN_POINTS = [
-  { step: '01', title: 'Fragmented Tools', desc: 'Teams, SAP GUI, SM37, ServiceNow, email, documentation portals — each switch costs time.', icon: '⚡' },
-  { step: '02', title: 'Delayed Understanding', desc: 'Technical logs and error messages require specialized knowledge to interpret correctly.', icon: '⏱' },
-  { step: '03', title: 'Expert Dependency', desc: 'Critical information is locked in the minds of a few specialists who are not always available.', icon: '🔒' },
-  { step: '04', title: 'Slower Resolution', desc: 'Coordination across teams, systems, and timezones extends mean time to resolution.', icon: '📉' },
-  { step: '05', title: 'Business Impact', desc: 'Every hour of delayed resolution translates to operational and financial consequences.', icon: '💼' },
+const PAIN_CHAIN = [
+  { label: 'Fragmented Tools', icon: '⚡', color: '#F15B64', desc: 'Switching between Teams, SAP GUI, SM37, ServiceNow, email, and documentation portals for a single question.' },
+  { label: 'Delayed Understanding', icon: '⏱', color: '#F5B942', desc: 'Technical logs and error messages require specialized knowledge that is not always at hand.' },
+  { label: 'Expert Dependency', icon: '🔒', color: '#A01441', desc: 'Critical operational knowledge lives in the minds of a few specialists who are not always available.' },
+  { label: 'Slower Resolution', icon: '📉', color: '#C52A5C', desc: 'Coordinating across teams, systems, and time zones extends mean time to resolution.' },
+  { label: 'Business Impact', icon: '💼', color: '#8B5CF6', desc: 'Every hour of delayed resolution translates to operational and financial consequences.' },
 ];
 
 export function Challenge() {
@@ -26,89 +26,136 @@ export function Challenge() {
 
   return (
     <section id="challenge" className="section-padding relative" aria-label="The SAP access problem">
-      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" aria-hidden="true" />
+
+      {/* Ambient red glow top-right */}
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[400px] -z-10 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 80% 20%, rgba(241,91,100,0.06) 0%, transparent 70%)' }}
+        aria-hidden="true"
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionTitle
           eyebrow="The Challenge"
           title="Information is available."
-          titleHighlight="But it is fragmented."
-          subtitle="Accessing SAP operational value requires switching between multiple applications, holding specialized knowledge, and coordinating across teams."
+          titleHighlight="But fragmented."
+          subtitle="Accessing SAP operational value requires switching between multiple applications, holding specialized knowledge, and coordinating across teams — even for a simple question."
         />
 
-        {/* Tool chaos visualization */}
+        {/* Tool chaos — scattered cards */}
         <div ref={ref} className="mt-16 mb-16">
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-text-secondary mb-6">Typical tools for one operational question</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-text-secondary mb-5">
+            Typical tools needed for one operational question
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
             {TOOLS.map((tool, i) => (
               <motion.div
                 key={tool.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={visible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="glass rounded-xl p-4 flex flex-col items-center gap-2 text-center border border-border hover:border-white/15 transition-colors"
+                initial={{ opacity: 0, y: 20, rotate: (i % 2 === 0 ? -1 : 1) }}
+                animate={visible ? { opacity: 1, y: 0, rotate: 0 } : {}}
+                transition={{ duration: 0.45, delay: i * 0.07, type: 'spring', stiffness: 120 }}
+                className="flex flex-col items-center gap-2 text-center p-4 rounded-2xl border transition-all"
+                style={{
+                  background: `radial-gradient(ellipse at 50% 0%, ${tool.color}10 0%, rgba(17,19,26,0.85) 70%)`,
+                  borderColor: `${tool.color}25`,
+                }}
               >
-                <tool.icon size={20} className={tool.color} aria-hidden="true" />
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center"
+                  style={{ background: `${tool.color}15`, border: `1px solid ${tool.color}30` }}
+                >
+                  <tool.icon size={18} style={{ color: tool.color }} aria-hidden="true" />
+                </div>
                 <span className="text-xs font-medium text-text-primary leading-tight">{tool.label}</span>
-                <span className="text-xs text-text-secondary opacity-60">{tool.desc}</span>
+                <span className="text-[10px] text-text-secondary opacity-60">{tool.desc}</span>
               </motion.div>
             ))}
           </div>
-          <div className="flex items-center justify-center mt-4 gap-2">
-            <span className="text-xs text-text-secondary opacity-60">Each tool switch adds cognitive load, transition time, and potential error</span>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={visible ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="flex items-center gap-2 mt-4 text-xs text-text-secondary opacity-50"
+          >
+            <AlertTriangle size={12} className="text-warning" />
+            Each tool switch adds cognitive load, transition time, and potential for error
+          </motion.div>
         </div>
 
-        {/* Pain chain */}
-        <div className="relative">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent hidden md:block" aria-hidden="true" />
-          <div className="space-y-6 md:pl-16">
-            {PAIN_POINTS.map((point, i) => (
-              <motion.div
-                key={point.step}
-                initial={{ opacity: 0, x: -20 }}
-                animate={visible ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                className="flex items-start gap-5 glass rounded-xl p-5 border border-border hover:border-primary/20 transition-colors group"
+        {/* Pain chain — vertical timeline */}
+        <div className="relative grid sm:grid-cols-5 gap-4">
+          {/* Horizontal connector line (desktop) */}
+          <div
+            className="hidden sm:block absolute top-9 left-[10%] right-[10%] h-px"
+            style={{ background: 'linear-gradient(to right, transparent, rgba(160,20,65,0.3) 20%, rgba(160,20,65,0.3) 80%, transparent)' }}
+            aria-hidden="true"
+          />
+
+          {PAIN_CHAIN.map((step, i) => (
+            <motion.div
+              key={step.label}
+              initial={{ opacity: 0, y: 30 }}
+              animate={visible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+              className="flex flex-col items-center text-center relative"
+            >
+              {/* Circle */}
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4 border relative z-10"
+                style={{
+                  background: `radial-gradient(ellipse, ${step.color}20 0%, rgba(17,19,26,0.9) 70%)`,
+                  borderColor: `${step.color}40`,
+                  boxShadow: `0 0 20px ${step.color}20`,
+                  backgroundColor: '#07080C',
+                }}
+                role="img"
+                aria-label={step.label}
               >
-                <div className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <span className="text-lg" role="img" aria-label={point.title}>{point.icon}</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-mono text-primary">{point.step}</span>
-                    <ArrowRight size={12} className="text-primary" aria-hidden="true" />
-                    <h3 className="text-sm font-semibold text-text-primary">{point.title}</h3>
-                  </div>
-                  <p className="text-sm text-text-secondary">{point.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                {step.icon}
+              </div>
+              <h3 className="text-sm font-semibold text-text-primary mb-1.5">{step.label}</h3>
+              <p className="text-xs text-text-secondary leading-relaxed">{step.desc}</p>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Transition statement */}
+        {/* Resolution statement */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 1 }}
+          transition={{ duration: 0.7, delay: 1.0 }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex flex-col items-center gap-4 glass rounded-2xl px-8 py-6 border border-primary/20">
-            <p className="text-text-secondary text-sm max-w-xl">
-              Organizations need a secure conversational intelligence layer that allows authorized users to ask questions, understand problems, and trigger governed actions — without navigating through multiple applications.
+          <div
+            className="inline-flex flex-col items-center gap-5 px-10 py-8 rounded-3xl border max-w-2xl mx-auto"
+            style={{
+              background: 'linear-gradient(135deg, rgba(160,20,65,0.1) 0%, rgba(17,19,26,0.9) 60%)',
+              borderColor: 'rgba(160,20,65,0.25)',
+              boxShadow: '0 0 40px rgba(160,20,65,0.1)',
+            }}
+          >
+            <p className="text-text-secondary text-sm leading-relaxed">
+              Organizations need a secure conversational intelligence layer that allows authorized users to ask questions, understand problems, discover business capabilities, and trigger governed actions — without navigating through multiple applications.
             </p>
             <div className="flex items-center gap-3 text-sm font-medium flex-wrap justify-center">
-              <span className="text-info">Microsoft Teams</span>
-              <span className="text-text-secondary">+</span>
-              <span className="text-primary">Agentic AI</span>
-              <span className="text-text-secondary">+</span>
-              <span className="text-success">SAP Connectivity</span>
-              <span className="text-text-secondary">+</span>
+              <span style={{ color: '#5DA9FF' }}>Microsoft Teams</span>
+              <span className="text-white/30">+</span>
+              <span style={{ color: '#A01441' }}>Agentic AI</span>
+              <span className="text-white/30">+</span>
+              <span style={{ color: '#39C985' }}>SAP Connectivity</span>
+              <span className="text-white/30">+</span>
               <span className="text-text-primary">MSG Expertise</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-text-secondary">=</span>
-              <span className="text-text-primary font-semibold">One secure conversational entry point for SAP intelligence and action.</span>
+            <div
+              className="text-base font-semibold text-text-primary px-5 py-2 rounded-full border"
+              style={{
+                background: 'rgba(160,20,65,0.12)',
+                borderColor: 'rgba(160,20,65,0.3)',
+                textShadow: '0 0 20px rgba(197,42,92,0.4)',
+              }}
+            >
+              = One secure conversational entry point for SAP intelligence and action
             </div>
           </div>
         </motion.div>

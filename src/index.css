@@ -94,7 +94,7 @@ code, pre, .font-mono {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #F7F7F8 0%, #A01441 50%, #C52A5C 100%);
+  background: linear-gradient(120deg, #F7F7F8 0%, #E05080 30%, #A01441 60%, #C52A5C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -108,23 +108,94 @@ code, pre, .font-mono {
 }
 
 .glow-primary {
-  box-shadow: 0 0 30px var(--glow-primary);
+  box-shadow: 0 0 30px rgba(160,20,65,0.45), 0 0 60px rgba(160,20,65,0.15);
 }
 
 .glow-pulse {
-  animation: glowPulse 3s ease-in-out infinite;
+  animation: glowPulse 2.5s ease-in-out infinite;
 }
 
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(160, 20, 65, 0.3); }
-  50% { box-shadow: 0 0 50px rgba(160, 20, 65, 0.6), 0 0 100px rgba(160, 20, 65, 0.2); }
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(160,20,65,0.35), 0 0 40px rgba(160,20,65,0.12), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(160,20,65,0.7), 0 0 100px rgba(160,20,65,0.25), 0 0 160px rgba(160,20,65,0.08), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+}
+
+/* Neon text glow */
+.neon-text {
+  text-shadow: 0 0 20px rgba(197,42,92,0.8), 0 0 40px rgba(160,20,65,0.5), 0 0 80px rgba(160,20,65,0.25);
+}
+
+/* Cinematic radial background */
+.hero-radial {
+  background: radial-gradient(ellipse 80% 60% at 40% 50%, rgba(109,13,46,0.4) 0%, transparent 65%),
+              radial-gradient(ellipse 40% 40% at 50% 50%, rgba(160,20,65,0.2) 0%, transparent 50%),
+              #07080C;
+}
+
+/* Card hover glow */
+.card-hover-glow:hover {
+  box-shadow: 0 0 0 1px rgba(160,20,65,0.3), 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(160,20,65,0.1);
 }
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Neon scan line sweep */
+.neon-scan::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, rgba(160,20,65,0) 20%, rgba(160,20,65,0.55) 50%, rgba(160,20,65,0) 80%, transparent 100%);
+  animation: scanSweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes scanSweep {
+  0%   { top: 15%; opacity: 0; }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { top: 85%; opacity: 0; }
+}
+
+/* Neon glow border — animated */
+.neon-border-animated {
+  position: relative;
+}
+.neon-border-animated::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(160,20,65,0.7) 0%, rgba(93,169,255,0.3) 40%, rgba(160,20,65,0.5) 100%);
+  background-size: 300% 300%;
+  animation: neonBorderFlow 4s linear infinite;
+  z-index: -1;
+  filter: blur(1px);
+}
+@keyframes neonBorderFlow {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Pulsing dot */
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Neon headline gradient shift */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
 }
 
 .noise-overlay::after {
