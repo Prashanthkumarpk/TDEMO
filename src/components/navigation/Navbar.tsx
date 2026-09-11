@@ -3,20 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Presentation } from 'lucide-react';
 import { useAppStore } from '@/store/appStore';
 
+// Five presentation-facing nav items — labels exactly as requested
 const NAV_LINKS = [
-  { href: '#challenge', label: 'Challenge' },
-  { href: '#idea', label: 'The Idea' },
-  { href: '#demo', label: 'Demo' },
-  { href: '#use-cases', label: 'Use Cases' },
-  { href: '#architecture', label: 'Architecture' },
-  { href: '#business-value', label: 'Value' },
-  { href: '#roadmap', label: 'Roadmap' },
+  { href: '#challenge',      label: 'Problem Statement', section: 'challenge'      },
+  { href: '#idea',           label: 'Solution',          section: 'idea'           },
+  { href: '#demo',           label: 'Demo',              section: 'demo'           },
+  { href: '#personas',       label: 'Target Audience',   section: 'personas'       },
+  { href: '#roadmap',        label: 'Roadmap',           section: 'roadmap'        },
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { enterPresentationMode } = useAppStore();
+  const { enterPresentationMode, activeSection } = useAppStore();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -37,35 +36,61 @@ export function Navbar() {
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2 focus-visible:outline-none" aria-label="SAP Agentic Command Center — Home">
-            <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center">
+          <a
+            href="#hero"
+            className="flex items-center gap-2.5 focus-visible:outline-none shrink-0"
+            aria-label="SAP Agentic Command Center — Home"
+          >
+            <div
+              className="w-7 h-7 rounded-md flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg,#A01441,#C52A5C)', boxShadow: '0 0 12px rgba(160,20,65,0.45)' }}
+            >
               <span className="text-xs font-bold text-white">S</span>
             </div>
-            <div className="hidden sm:block">
-              <span className="text-sm font-heading font-semibold text-text-primary">SAP</span>
-              <span className="text-sm font-heading font-light text-text-secondary ml-1">Agentic Command Center</span>
+            <div className="hidden sm:flex flex-col leading-none">
+              <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-primary">INNOVA SPARK</span>
+              <span className="text-sm font-heading font-semibold text-text-primary leading-tight">SAP Agentic Command Center</span>
             </div>
           </a>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-6" aria-label="Section links">
-            {NAV_LINKS.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Desktop nav — five items with active indicator */}
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Section links">
+            {NAV_LINKS.map(link => {
+              const isActive = activeSection === link.section ||
+                (link.section === 'roadmap' && activeSection === 'business-value');
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'text-text-primary'
+                      : 'text-text-secondary hover:text-text-primary hover:bg-white/4'
+                  }`}
+                  style={isActive ? { background: 'rgba(160,20,65,0.1)' } : {}}
+                >
+                  {link.label}
+                  {/* Active underline dot */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-dot"
+                      className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={enterPresentationMode}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 glass border border-primary/30 hover:border-primary text-primary text-xs font-medium rounded-lg transition-all"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 glass border border-primary/30 hover:border-primary/60 text-primary text-xs font-medium rounded-lg transition-all"
               aria-label="Start presentation mode"
             >
               <Presentation size={13} />
@@ -73,7 +98,8 @@ export function Navbar() {
             </button>
             <a
               href="#demo"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-primary hover:bg-primary-light text-white text-xs font-medium rounded-lg transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-white text-xs font-medium rounded-lg transition-all"
+              style={{ background: 'linear-gradient(135deg,#A01441,#C52A5C)', boxShadow: '0 0 16px rgba(160,20,65,0.35)' }}
             >
               Try Demo
             </a>
@@ -93,30 +119,42 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-14 inset-x-0 z-40 glass-strong border-b border-border px-4 py-4 lg:hidden"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className="fixed top-[52px] inset-x-0 z-40 glass-strong border-b border-border px-5 py-4 lg:hidden"
           >
-            <nav className="flex flex-col gap-3" aria-label="Mobile navigation">
-              {NAV_LINKS.map(link => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-text-secondary hover:text-text-primary py-1.5 transition-colors"
-                  onClick={() => setMobileOpen(false)}
+            <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+              {NAV_LINKS.map(link => {
+                const isActive = activeSection === link.section ||
+                  (link.section === 'roadmap' && activeSection === 'business-value');
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                      isActive
+                        ? 'text-text-primary font-medium'
+                        : 'text-text-secondary hover:text-text-primary'
+                    }`}
+                    style={isActive ? { background: 'rgba(160,20,65,0.1)' } : {}}
+                  >
+                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />}
+                    {link.label}
+                  </a>
+                );
+              })}
+              <div className="border-t border-border mt-2 pt-3">
+                <button
+                  onClick={() => { enterPresentationMode(); setMobileOpen(false); }}
+                  className="flex items-center gap-2 text-primary text-sm font-medium px-3 py-2"
                 >
-                  {link.label}
-                </a>
-              ))}
-              <button
-                onClick={() => { enterPresentationMode(); setMobileOpen(false); }}
-                className="flex items-center gap-1.5 text-primary text-sm py-1.5"
-              >
-                <Presentation size={14} />
-                Start Presentation
-              </button>
+                  <Presentation size={14} />
+                  Start Presentation
+                </button>
+              </div>
             </nav>
           </motion.div>
         )}
