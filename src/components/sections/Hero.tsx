@@ -272,27 +272,20 @@ export function Hero() {
 
           {/* LEFT — headline + CTAs */}
           <div>
-            {/* Eyebrow badges */}
+            {/* Eyebrow badge */}
             <motion.div
               initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.05 }}
               className="flex items-center gap-2 flex-wrap mb-7"
             >
-              {[
-                { label: 'TECH INTERRUPT', style: 'border-white/12 text-text-secondary' },
-                { label: 'TI IDEA', style: 'border-primary/55 text-primary', dot: true },
-                { label: 'INNOVA SPARK', style: 'border-white/12 text-text-secondary' },
-              ].map(b => (
-                <span
-                  key={b.label}
-                  className={`flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border ${b.style}`}
-                  style={{ background: 'rgba(255,255,255,0.03)' }}
-                >
-                  {b.dot && <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />}
-                  {b.label}
-                </span>
-              ))}
+              <span
+                className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-primary/55 text-primary"
+                style={{ background: 'rgba(255,255,255,0.03)' }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                SAP Agentic Intelligence
+              </span>
             </motion.div>
 
             {/* Main headline */}
@@ -330,7 +323,7 @@ export function Hero() {
                 className="mt-3 text-[10px] font-mono tracking-[0.35em] uppercase"
                 style={{ color: 'rgba(197,42,92,0.7)', textShadow: '0 0 12px rgba(197,42,92,0.3)' }}
               >
-                SACC · INNOVA SAPARK · MSG GLOBAL SOLUTIONS
+                SACC · MSG GLOBAL SOLUTIONS
               </div>
             </motion.div>
 

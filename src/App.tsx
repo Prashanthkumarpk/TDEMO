@@ -22,10 +22,10 @@ function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-center sm:text-left">
           <div className="text-sm font-medium text-text-primary">SAP Agentic Command Center</div>
-          <div className="text-xs text-text-secondary">INNOVA SPARK · MSG Global Solutions · TECH INTERRUPT</div>
+          <div className="text-xs text-text-secondary">MSG Global Solutions · SAP Agentic Command Center</div>
         </div>
         <div className="text-xs text-text-secondary opacity-50 text-center">
-          Hackathon Demo — All data is fictional mock data. No real SAP systems or credentials are used.
+          All data is fictional mock data for demonstration purposes. No real SAP systems or credentials are used.
         </div>
       </div>
     </footer>

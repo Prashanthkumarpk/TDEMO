@@ -149,7 +149,116 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
       },
     ] as DemoStep[],
   },
+  // FSRI scenario appended below after its declaration
 ];
+
+const FSRI_DEMO_SCENARIO: DemoScenario = {
+  id: 'fsri-reinsurance',
+  title: 'FS-RI Reinsurance Intelligence',
+  description: 'Treaty structures, job monitoring, posting analysis, and domain explanations for Pacific Life',
+  system: 'PRD',
+  steps: [
+    {
+      id: 'fsri-1-user',
+      role: 'user',
+      content: 'Give me the structural characteristics for the treaty 1634103',
+      delay: 0,
+    },
+    {
+      id: 'fsri-2-agent',
+      role: 'agent',
+      content: `📄 **Treaty 1634103: Structural Characteristics**\n\n🏛️ System / Client    T30 / 800\n📑 Type               Non-life proportional assumed treaty\n🧩 Sections           1 (Surplus)\n🔥 Class of business   113 – Fire\n🌍 Area               DE – Germany\n🤝 Business type       10 – Direct\n💶 Currency           EUR\n📅 Accounting mode    OYTTY – Treaty based on Occurrence Year`,
+      delay: 1200,
+    },
+    {
+      id: 'fsri-3-user',
+      role: 'user',
+      content: 'Provide me with the list of background jobs run yesterday with their statuses',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-4-agent',
+      role: 'agent',
+      content: `⚙️ **Background Job Overview**\n🖥️ System: MGSS81A  |  👤 Executed by: MSGBASIS  |  🔁 Job: /BDL/TASK_PROCESSOR\n\nJob Count    Start       Duration   Status\n─────────────────────────────────────────\n00533804     01:53:38    0 s        ✅ Finished\n01533804     02:53:38    0 s        ✅ Finished\n02533807     03:53:38    0 s        ✅ Finished\n03533806     04:53:38    0 s        ✅ Finished\n04533804     05:53:38    0 s        ✅ Finished\n05533805     06:53:38    0 s        ✅ Finished\n06533803     07:53:38    0 s        ✅ Finished\n0753380N     08:53:38    0 s        ✅ Finished\n08533805     09:53:38    0 s        ✅ Finished\n09533807     10:53:38    0 s        ✅ Finished\n\n📌 10 runs, all completed successfully. The job runs hourly and nothing needs attention.`,
+      delay: 1400,
+    },
+    {
+      id: 'fsri-5-user',
+      role: 'user',
+      content: 'Give job logs for the failed batch jobs',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-6-agent',
+      role: 'agent',
+      content: `🚨 **Job: /1DH/CDC_SYSTEM_START**  |  👤 DDIC  |  🖥️ T30\n\nJob Count    Date      Start       Duration   Status\n──────────────────────────────────────────────────\n07340700     15 May    08:03:14    0 s        ✅ Finished\n07340800     15 May    08:03:14    0 s        ✅ Finished\n08031400     09 Jun    10:33:35    1 s        ✅ Finished\n08031401     09 Jun    10:33:35    1 s        ✅ Finished\n10333500     10 Jun    18:19:37    1 s        ✅ Finished\n10333501     10 Jun    18:19:37    1 s        ✅ Finished\n18193700     11 Jun    19:27:43    1 s        ✅ Finished\n18193701     11 Jun    19:27:43    1 s        ✅ Finished\n19274300     16 Jun    21:21:38    0 s        ✅ Finished\n19274301     16 Jun    21:21:39    0 s        ✅ Finished`,
+      delay: 1400,
+    },
+    {
+      id: 'fsri-7-user',
+      role: 'user',
+      content: 'Analyse the job log, why did this happen? (job ZSRT_KAR, count 22321700)',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-8-agent',
+      role: 'agent',
+      content: `🔍 **Job Log Review**\n\n🏷️ Job / System: ZSRT_KAR, count 22321700, MGSS81A\n📊 Status: ✅ Finished\n\n📝 **Key log findings:**\n🟢 22:32:20  Job started\n🟢 22:32:20  Step 001 started (program ZSRT_KAR, variant &0000000000103, user MADAVANK)\n🟢 22:34:03  Job finished\n\n🧠 **Likely cause:** No error was logged. The job ran as a normal execution and took about 1 min 43 s.\n\n💼 Business impact: None identified.\n🛠️ Next steps: No action needed. If you expected a failure, check the spool output of step 001.\n👥 Escalation owner: None required.`,
+      delay: 1600,
+      auditRequired: true,
+    },
+    {
+      id: 'fsri-9-user',
+      role: 'user',
+      content: 'How many accounts with OS posting (entry code 5030) have been released by the user Prasanth today?',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-10-agent',
+      role: 'agent',
+      content: `📬 **OS Posting Release Summary**\n\n👤 Released by:        Prasanth\n🔖 Entry code:         5030 (OS posting)\n✅ Total released:     34 accounts\n⏳ In batch_release:   6 accounts`,
+      delay: 1200,
+    },
+    {
+      id: 'fsri-11-user',
+      role: 'user',
+      content: 'List the flexible criteria allotted in the PTF treaty with name MR test PTF Treaty*',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-12-agent',
+      role: 'agent',
+      content: `🌪️ **Flexible Criteria Overview**\n\n📑 Treaty:          MR test PTF Treaty\n🔢 Treaty number:   2618699\n🧭 Flexible criteria: **FLOODSTORM** (the only one set up)\n\n💬 Let me know if you'd like to add or modify flexible criteria for this treaty.`,
+      delay: 1200,
+    },
+    {
+      id: 'fsri-13-user',
+      role: 'user',
+      content: 'Can you please explain how profit commission with carry forward works?',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-14-agent',
+      role: 'agent',
+      content: `💰 **Profit Commission with Carry Forward**\n\nThe reinsurer pays profit commission to the cedent only after previous years' losses have been recovered.\n\n📊 Example at a 20% commission rate:\n\nYear    Result               Effect\n──────────────────────────────────────────────────\n2024    Loss of ₹65,000      Carried forward\n2025    Loss of ₹65,000      Total deficit: ₹1,30,000\n2026    Profit of ₹1,80,000  ₹1,80,000 − ₹1,30,000 = ₹50,000 commissionable\n\n🔑 **Key point:** Previous losses must be recovered before any profit commission is paid. With "Until Extinction", the deficit carries forward until fully recovered.\n\n20% × ₹50,000 = **₹10,000 profit commission payable in 2026**.`,
+      delay: 1600,
+    },
+    {
+      id: 'fsri-15-user',
+      role: 'user',
+      content: 'Explain like I am 5',
+      delay: 1800,
+    },
+    {
+      id: 'fsri-16-agent',
+      role: 'agent',
+      content: `🍋 **The Lemonade Shop Version**\n\nImagine you run a lemonade shop and share profits with a helper (the reinsurer).\n\n😕 **Year 1:** You lose ₹100 — no profit to share yet, loss carried forward.\n😟 **Year 2:** You lose another ₹50 — total old losses are now ₹150.\n🎉 **Year 3:** You earn ₹200 profit!\n\nFirst you pay back the old losses:\n₹200 − ₹150 = **₹50 left over**\nYour helper's share: 20% × ₹50 = **₹10 commission**\n\n💡 **Simple rule:** Earn money → pay back old losses first → share what's left.\n\n"Carry forward" just means remembering the old losses and bringing them into next year until they're fully paid off.`,
+      delay: 1400,
+    },
+  ] as DemoStep[],
+};
+
+DEMO_SCENARIOS.push(FSRI_DEMO_SCENARIO);
 
 export const SUGGESTED_PROMPTS: Array<{ category: string; prompts: string[] }> = [
   {

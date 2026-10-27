@@ -212,6 +212,7 @@ export function TeamsDemo() {
     { id: 'incidents', label: 'Incidents' },
     { id: 'scenarios', label: 'Business Scenarios' },
     { id: 'security', label: 'Security Demo' },
+    { id: 'reinsurance', label: 'Reinsurance (FS-RI)' },
   ];
 
   const tabScenarios: Record<string, string> = {
@@ -219,6 +220,7 @@ export function TeamsDemo() {
     'incidents': 'guided-demo-main',
     'scenarios': 'scenario-discovery',
     'security': 'security-demo',
+    'reinsurance': 'fsri-reinsurance',
   };
 
   return (
